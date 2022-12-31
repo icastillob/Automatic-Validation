@@ -2,7 +2,7 @@
 # Automatic validation with Excel and R -----------------------------------
 # ++++++++++++++++++++++++++++++ ------------------------------------------
 
-# Librerías utilizadas ----------------------------------------------------
+# Libraries ---------- ----------------------------------------------------
 
 ##  Instalar y cargar paquetes
 rm(list = ls())
@@ -17,10 +17,7 @@ if (!require("rlang")) install.packages("rlang") ; library(rlang)
 if (!require("purrr")) install.packages("purrr") ; library(purrr) 
 if (!require("RCurl")) install.packages("RCurl") ; library(RCurl) 
 
-# Ingest data and rules -----------------------------------------------------
-cwd <- '/Users/icastillob/Downloads/Validación automática'
-setwd(cwd)
-
+# Ingest data and rules ---------------------------------------------------
 df <- read.csv("https://raw.githubusercontent.com/ywchiu/riii/master/data/house-prices.csv")
 rules <- read_excel('rules.xlsx')
 
@@ -53,11 +50,11 @@ F_val <-  function(df, rules) {
 }
 
 
-# Validation automatic
+# Automatic validation
 Validation <- F_val(df = df, rules = rules)
+
 ids <- sort(unique(rules$ID))
 
-# Validaciones
 for (i in ids) {
   if(i == 1){
     df_Validation <- Validation[[1]]}
@@ -77,15 +74,15 @@ df_Validation <- df_Validation %>%
 
 # Export ----------------------------------------------------------------
 
-wb <- createWorkbook("VALIDATION_AUTOMATIC")
-addWorksheet(wb, "Val_Automatic", gridLines = FALSE)
+wb <- createWorkbook("Automatic_Validation")
+addWorksheet(wb, "Automatic_Validation", gridLines = FALSE)
 
 hd <- createStyle(fgFill = "#08519c", halign = "CENTER", textDecoration = "Bold", fontColour = "white")
-writeData(wb,"Val_Automatic", df_Validation, startRow = 1, startCol = 1, headerStyle = hd, withFilter = TRUE)
+writeData(wb,"Automatic_Validation", df_Validation, startRow = 1, startCol = 1, headerStyle = hd, withFilter = TRUE)
 
 red <- createStyle(fontColour = "red")
-conditionalFormatting(wb, "Val_Automatic", cols = 5:42, rows = 2:5000, rule = ">0", style = red)
+conditionalFormatting(wb, "Automatic_Validation", cols = 5:42, rows = 2:5000, rule = ">0", style = red)
 
-saveWorkbook(wb, "Results/VALIDATION_AUTOMATIC.xlsx", overwrite = TRUE)
+saveWorkbook(wb, "Results/Automatic_Validation.xlsx", overwrite = TRUE)
 
 

@@ -3,8 +3,6 @@
 # ++++++++++++++++++++++++++++++ ------------------------------------------
 
 # Libraries ---------- ----------------------------------------------------
-
-##  Instalar y cargar paquetes
 rm(list = ls())
 
 if (!require("readr")) install.packages("readr") ; library(readr)   
@@ -21,7 +19,7 @@ if (!require("RCurl")) install.packages("RCurl") ; library(RCurl)
 df <- read.csv("https://raw.githubusercontent.com/ywchiu/riii/master/data/house-prices.csv")
 rules <- read_excel('rules.xlsx')
 
-# Edit data with wrong data
+# Edit with wrong data
 df[3, "Bedrooms"] <- 0
 df[3, "Bathrooms"] <- 0
 df[4, "Price"] <- 0

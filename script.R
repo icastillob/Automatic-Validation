@@ -81,7 +81,7 @@ hd <- createStyle(fgFill = "#08519c", halign = "CENTER", textDecoration = "Bold"
 writeData(wb,"Automatic_Validation", df_Validation, startRow = 1, startCol = 1, headerStyle = hd, withFilter = TRUE)
 
 red <- createStyle(fontColour = "red")
-conditionalFormatting(wb, "Automatic_Validation", cols = 5:42, rows = 2:5000, rule = ">0", style = red)
+conditionalFormatting(wb, "Automatic_Validation", cols = 2:40, rows = 2:5000, rule = ">0", style = red)
 
 saveWorkbook(wb, "Results/Automatic_Validation.xlsx", overwrite = TRUE)
 
